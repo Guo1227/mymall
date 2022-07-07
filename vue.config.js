@@ -1,17 +1,56 @@
-//vuecli3配置alias
-const path = require('path');
-function resolve(dir) {
-  return path.join(__dirname, dir); //设置绝对路径
-}
-
+//方法二,更常用
 module.exports = {
   transpileDependencies: true,
-  chainWebpack: config => {
-    config.resolve.alias.set('@', resolve('src')); //参数1,设置的别名,参数2：设置的路径
-    config.resolve.alias.set('components', resolve('src/components'));
-    config.resolve.alias.set('assets', resolve('src/assets'));
-    config.resolve.alias.set('router', resolve('src/router'));
-    config.resolve.alias.set('store', resolve('src/store'));
-    config.resolve.alias.set('network', resolve('src/network'));
+  configureWebpack: {
+    resolve: {
+      alias: {
+        assets: "@/assets",
+        components: "@/components",
+        common: "@/common",
+        network: "@/network",
+        views: "@/views",
+      },
+    },
   },
+  // css: {
+  //   loaderOptions: {
+  //     postcss: {
+  //       plugins: [
+  //         require("postcss-px-to-viewport")({
+  //           unitToConvert: "px", //需要转换的单位，默认为"px"
+  //           viewportWidth: 375, // 视窗的宽度，对应的是我们设计稿的宽度
+  //           viewportHeight: 667, //视窗的高度，根据375设备的宽度来指定，一般指定667，也可以不配置
+  //           unitPrecision: 5, // 指定`px`转换为视窗单位值的小数位数（很多时候无法整除）
+  //           propList: ["*"], // 能转化为vw的属性列表
+  //           viewportUnit: "vw", // 指定需要转换成的视窗单位，建议使用vw
+  //           fontViewportUnit: "vw", //字体使用的视口单位
+  //           selectorBlackList: ["ignore", "tab-bar", "tab-bar-item"], //指定不转换为视窗单位的类，可以自定义，可以无限添加,建议定义一至两个通用的类名
+  //           minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+  //           mediaQuery: false, // 允许在媒体查询中转换`px`
+  //           replace: true, //是否直接更换属性值，而不添加备用属性
+  //           exclude: [/TabBar/],
+  //         }),
+  //       ],
+  //     },
+  //   },
+  // },
 };
+
+// //vuecli3配置alias 方法一
+// const path = require('path');
+// function resolve(dir) {
+//   return path.join(__dirname, dir); //设置绝对路径
+// }
+
+// module.exports = {
+//   transpileDependencies: true,
+//   chainWebpack: config => {
+//     config.resolve.alias.set('@', resolve('src')); //参数1,设置的别名,参数2：设置的路径
+//     config.resolve.alias.set('components', resolve('src/components'));
+//     config.resolve.alias.set('assets', resolve('src/assets'));
+//     config.resolve.alias.set('router', resolve('src/router'));
+//     config.resolve.alias.set('store', resolve('src/store'));
+//     config.resolve.alias.set('network', resolve('src/network'));
+//     config.resolve.alias.set('views', resolve('src/views'));
+//   },
+// };
